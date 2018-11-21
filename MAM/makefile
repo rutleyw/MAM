@@ -777,6 +777,14 @@ compare_RepastHPC_Demo_02_Step_05:
 
 ###############################################
 .PHONY: RepastHPC_MAM
+RepastHPC_MAM: clean_compiled_files
+	$(MPICXX) $(REPAST_HPC_DEFINES) $(BOOST_INCLUDE) $(REPAST_HPC_INCLUDE) -I./include -c ./src/MAM_Main.cpp -o ./objects/MAM_Main.o
+	$(MPICXX) $(REPAST_HPC_DEFINES) $(BOOST_INCLUDE) $(REPAST_HPC_INCLUDE) -I./include -c ./src/MAM_Model.cpp -o ./objects/MAM_Model.o
+	$(MPICXX) $(REPAST_HPC_DEFINES) $(BOOST_INCLUDE) $(REPAST_HPC_INCLUDE) -I./include -c ./src/MAM_Agent.cpp -o ./objects/MAM_Agent.o
+	$(MPICXX) $(BOOST_LIB_DIR) $(REPAST_HPC_LIB_DIR) -o ./bin/MAM.exe  ./objects/MAM_Main.o ./objects/MAM_Model.o ./objects/MAM_Agent.o $(REPAST_HPC_LIB) $(BOOST_LIBS)
+
+
+.PHONY: RepastHPC_MAM
 RepastHPC_MAM : copy_RepastHPC_MAM RepastHPC_MAM
 
 .PHONY: copy_RepastHPC_MAM
@@ -787,15 +795,15 @@ copy_RepastHPC_MAM : clean
 .PHONY: compare_RepastHPC_MAM
 compare_RepastHPC_MAM:
 	@echo "Comparing Demo_02/Step_05/Demo_02_Agent.h:"
-	-@diff ../RepastHPC/Demo_02/Step_05/include/Demo_02_Agent.h ./include/Demo_02_Agent.h
+	-@diff ../RepastHPC/MAM/include/MAM_Agent.h ./include/MAM_Agent.h
 	@echo "Comparing Demo_02/Step_05/Demo_02_Model.h:"
-	-@diff ../RepastHPC/Demo_02/Step_05/include/Demo_02_Model.h ./include/Demo_02_Model.h
+	-@diff ../RepastHPC/MAM/include/MAM_Model.h ./include/MAM_Model.h
 	@echo "Comparing Demo_02/Step_05/Demo_02_Agent.cpp:"
-	-@diff ../RepastHPC/Demo_02/Step_05/src/Demo_02_Agent.cpp ./src/Demo_02_Agent.cpp
+	-@diff ../RepastHPC/MAM/src/MAM_Agent.cpp ./src/MAM_Agent.cpp
 	@echo "Comparing Demo_02/Step_05/Demo_02_Model.cpp:"
-	-@diff ../RepastHPC/Demo_02/Step_05/src/Demo_02_Model.cpp ./src/Demo_02_Model.cpp
+	-@diff ../RepastHPC/MAM/src/MAM_Model.cpp ./src/MAM_Model.cpp
 	@echo "Comparing Demo_02/Step_05/Demo_02_main.cpp:"
-	-@diff ../RepastHPC/Demo_02/Step_05/src/Demo_02_main.cpp ./src/Demo_02_main.cpp
+	-@diff ../RepastHPC/MAM/src/MAM_main.cpp ./src/MAM_main.cpp
 
 
 
