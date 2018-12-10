@@ -87,11 +87,7 @@ public:
 	RepastHPCDemoModel(std::string propsFile, int argc, char** argv, boost::mpi::communicator* comm);
 	~RepastHPCDemoModel();
 	void init();
-	void requestAgents();
     void connectAgentNetwork();
-	void cancelAgentRequests();
-	void removeLocalAgents();
-	void moveAgents();
 	void doSomething();
 	void initSchedule(repast::ScheduleRunner& runner);
 	void recordResults();
